@@ -41,7 +41,7 @@ ADD_EXECUTABLE(vss-simulator src/Main.cpp)
 TARGET_LINK_LIBRARIES(vss-simulator vss-simulator-core)
 
 IF(RELEASE)
-    SET(CMAKE_CXX_FLAGS "-o2 -ffast-math -lm -lc -std=c++11 -pthread -DNDEBUG")
+    SET(CMAKE_CXX_FLAGS "-O3 -ffast-math -lm -lc -std=c++11 -pthread -DNDEBUG")
 
     INCLUDE(CPack)
 

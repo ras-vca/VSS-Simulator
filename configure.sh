@@ -87,7 +87,7 @@ INSTALL () {
     INSTALL_BASE;
 
     # Ubuntu
-    if [[ "$DISTRO" == "Ubuntu" ]] && [[ "$RELEASE" == "18.04" ]]; then
+    if [[ "$DISTRO" == "Ubuntu" ]] ; then
         INSTALL_UBUNTU_18_04;
     fi
 

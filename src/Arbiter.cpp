@@ -46,7 +46,10 @@ int Arbiter::checkWorld(){
 		//! caia na verificação. Dessa forma é garantido que sempre irá ser printado o tempo a cada minuto
 		relative_qtd_steps += 3500;
 		cout << "---" << relative_qtd_steps / 3500 << " MIN---" << endl;
+		
 	}
+
+	report->show();
 
 	report->qtd_of_steps++;
 

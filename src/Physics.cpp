@@ -166,9 +166,11 @@ void Physics::stepSimulation( float timeW, float subStep, float timeStep ){
 }
 
 void Physics::setupBodiesProp(){
-  for(int i = 0; i < genRobots.size(); i++) {
+  // fix resete de indicadores de colisão
+  for(int i = 0; i < bodies.size(); i++) {
     bodies.at( i )->hitRobot = false;
     bodies.at( i )->hit = false;
+    // cout << "Reset robo: "<< bodies.at( i )->name << ";" << endl;
   }
 }
 
@@ -193,21 +195,27 @@ bool Physics::callBackHitFunc( btManifoldPoint& cp, const btCollisionObjectWrapp
   vector<BulletObject*> vecObj;
 
   int contAgent = 0;
+ //  cout << "colisão entre : (";
   for(int i = 0; i < 2; i++) {
+
     BulletObject* btObj = (BulletObject*)wrappers[i]->getCollisionObject()->getUserPointer();
 
     vecObj.push_back( btObj );
 
     string name = btObj->name;
+
+   // cout << name << "; ";
     if (!name.compare( 0, prefix.size(), prefix ) || name == "ball")
       btObj->hit = true;
 
     if(!name.compare( 0, prefix.size(), prefix )) {
       contAgent++;
     }
+   // cout << "colisão entre : "<< contAgent << " nome: "<< name << endl;
   }
-
+ // cout << ") "<< endl;
   if(contAgent == 2) {
+    
     vecObj.at( 0 )->hitRobot = true;
     vecObj.at( 1 )->hitRobot = true;
   }
@@ -238,7 +246,7 @@ btVector3 Physics::getBallVelocity(){
       break;
     }
   }
-  //cout << ballVel.getX() << ", " << ballVel.getY() << ", " << ballVel.getZ() << endl;
+ // cout << ballVel.getX() << ";   " << ballVel.getY() << ";   " << ballVel.getZ() << ";   " << ballVel.length()<< ";   "<< ballVel.get2dVector()<< endl;
   return ballVel;
 }
 

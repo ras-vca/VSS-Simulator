@@ -203,17 +203,19 @@ void Simulator::updateReport(){
         btVector3 dBallRbDist = rbPos - ballPos;
 
         btVector3 velRobot = listRobots.at( i )->body->getLinearVelocity() * timeStep;
-        //cout << "traveled:\t" << velRobot.length() << endl;
+
         float modDist = dBallRbDist.length();
 
-        if(i >= listRobots.size() / 2) {
-            int id = i - listRobots.size() / 2;
-            report.travelled_distance_team[1][id] += velRobot.length();
-            //cout << "testeeeee-1" << endl;
-        }else{
-            report.travelled_distance_team[0][i] += velRobot.length();
+        // considera apenas a distancia percorrida em 2D
+        if(velRobot.get2dLength() > 0.001){
+            if(i >= listRobots.size() / 2) {
+                int id = i - listRobots.size() / 2;
+                report.travelled_distance_team[1][id] += velRobot.get2dLength();
+                //cout << "testeeeee-1" << endl;
+            }else{
+                report.travelled_distance_team[0][i] += velRobot.get2dLength();
+            }
         }
-
         if(minDist > modDist) {
             minDist = modDist;
             idDist = i;

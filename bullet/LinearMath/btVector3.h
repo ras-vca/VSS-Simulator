@@ -265,6 +265,11 @@ public:
 		return btSqrt(length2());
 	}
 
+	SIMD_FORCE_INLINE btScalar get2dLength() const
+	{
+		return btSqrt(m_floats[0] * m_floats[0] + m_floats[2] * m_floats[2]);
+	}
+
 	/**@brief Return the norm (length) of the vector */
 	SIMD_FORCE_INLINE btScalar norm() const
 	{
